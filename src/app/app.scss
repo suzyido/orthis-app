@@ -1,0 +1,48 @@
+.main-content {
+    background: color($colors, grayBackgound);
+}
+
+ion-grid {
+    background: color($colors, grayBackgound);
+}
+
+.ballotTitle {
+    font-size: 24px;
+    background-color: color($colors, grayBackgound);
+    padding: 0px;
+    margin: 0px;
+    color: color($colors, voteTextColor);
+    font-weight: bold;
+}
+
+.vote_item,
+.vote_item_selected,
+.add_ballots_button
+ {
+    position: relative;
+    width: 100%;
+    min-height: 200px;
+}
+
+.vote_item_selected {
+    border: 10px solid burlywood !important;
+}
+
+div.text_vote_container {
+    display: table;
+    width: auto;
+    height: 180px;
+    text-align: center;
+    color: color($colors, voteTextColor);
+    font-weight: bold;
+}
+span.text_vote {
+    font-size: 32px;
+    display: table-cell;
+    vertical-align: middle;      
+}
+.custom-popover .popover-content {
+    position: fixed;
+    top: 20%;
+    margin-top: -155px;
+  }

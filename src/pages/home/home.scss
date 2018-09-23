@@ -1,0 +1,49 @@
+page-home {
+    div.winning_vote_value, 
+    div.loosing_vote_value {
+        position: absolute;
+        height: 42px;
+        width: 42px;
+        font-size: 18px;
+        text-align: center;
+        vertical-align: middle;
+        line-height: 34px;
+        top: 1%;
+        left: 1%;
+        border-radius: 20px;
+        color: white;
+        padding: 1%;
+        animation: fadeAndScale 1s cubic-bezier(0,1.07,.72,1.42);
+        transform-origin: center bottom;
+    }
+    div.loosing_vote_value {
+        background-color: color($colors, ballotsLoosingColor)
+    }
+
+    div.winning_vote_value {
+        background-color: color($colors, ballotsWinningColor)
+    }
+
+    @keyframes fadeAndScale {
+        from {
+            opacity: 0;
+            transform: scale3d(.25, .25, 1);
+        }
+        to {
+            opacity: 1;
+            transform: scale3d(1, 1, 1);
+        }
+        
+    }
+
+    .ballots_subject {
+        max-width: 100% !important;
+        border-style: solid;
+        border-color: color($colors, voteTextColor);
+        margin-left: 5px;
+        margin-right: 5px;
+        padding: 7px;
+        border-radius: 5px;
+    }
+
+}

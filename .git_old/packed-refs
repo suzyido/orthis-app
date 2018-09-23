@@ -1,0 +1,4 @@
+# pack-refs with: peeled fully-peeled 
+0c1fe7a0a9c1c6003d541e3532266b48a1b23006 refs/remotes/origin/ionic-v2-branch
+6e5e0fa75126ef40316aa2e02ddba600af7cfe6e refs/remotes/origin/master
+166145d9f70cd299e676ff7bffe6fb6358c8e1ac refs/remotes/origin/update/lw-karma-2

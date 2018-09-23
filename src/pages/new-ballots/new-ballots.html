@@ -1,0 +1,46 @@
+
+<ion-header>
+  <ion-navbar>
+    <ion-buttons right>
+      <button 
+        ion-button 
+        icon-only
+        [disabled]="!isReady()"
+        (click)="onSave()">
+        <ion-icon name="checkmark"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons left>
+      <button ion-button icon-only menuToggle>
+          <ion-icon name="menu"></ion-icon>
+      </button>    
+    </ion-buttons>
+    <ion-title text-center>
+      New Ballots
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding class="main-content">
+  <form>
+    <ion-label text-center class="ballotTitle">Create a new Ballots</ion-label>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <new-ballots-item
+            [document]="documents[0]"
+            (onCreated)="onCreated($event, 0)">
+          </new-ballots-item>
+        </ion-col>
+      </ion-row>    
+      <ion-row>
+        <ion-col>
+          <new-ballots-item
+            [document]="documents[1]"
+            (onCreated)="onCreated($event, 1)">
+          </new-ballots-item>
+        </ion-col>
+      </ion-row>    
+    </ion-grid>
+  </form>
+</ion-content>

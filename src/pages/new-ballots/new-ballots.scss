@@ -1,0 +1,24 @@
+page-new-ballots {
+    .add_ballots_item {
+        margin-top: 10px;
+        margin-bottom: 10px;
+        margin-left: 0px;
+        margin-right: 0px;
+        font-size: 50px;
+        padding: 0px;
+        color: color($colors, voteTextColor);
+    }
+    
+    .remove_ballots_item {
+        position: absolute;
+        height: 28px;
+        width: 28px;
+        font-size: 25px;
+        top: 18px;
+        left: 18px;
+        border-radius: 28px;
+        color: color($colors, grayBackgound);
+        animation: fadeAndScale 1s cubic-bezier(0,1.07,.72,1.42);
+        transform-origin: center bottom;
+    }    
+}

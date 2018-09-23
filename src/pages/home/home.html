@@ -1,0 +1,76 @@
+<ion-header>
+  <ion-navbar>
+    <ion-buttons right>
+      <button 
+        ion-button 
+        icon-only
+        [disabled]="!isNextAllowed"
+        (click)="onPrev()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </button>
+      <button 
+        #nextBtn
+        ion-button 
+        icon-only
+        [disabled]="!isNextAllowed"
+        (click)="onNext()">
+        <ion-icon name="arrow-forward"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons left>
+      <button ion-button icon-only menuToggle>
+          <ion-icon name="menu"></ion-icon>
+      </button>  
+    </ion-buttons>
+    <ion-select 
+      class="ballots_subject"
+      [(ngModel)]="subject"
+      (ionChange)="subjectChanged()" >
+      <ion-option 
+        *ngFor="let option of selectOptions"
+        [value]="option">{{option}}</ion-option>
+    </ion-select>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding class="main-content">
+  <ion-label text-center class="ballotTitle">{{getBallotsQuestion()}}</ion-label>
+  <ion-grid *ngIf="isPortrait()">
+    <ion-row>
+      <ion-col>
+        <ballots-item 
+          [currentBallots]="getCurrentBallots()"
+          [index]="0"
+          [votedIndex]="getVotedIndex()"
+          (didVote)="onVote($event)"></ballots-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col>
+          <ballots-item 
+            [currentBallots]="getCurrentBallots()"
+            [index]="1"
+            [votedIndex]="getVotedIndex()"
+            (didVote)="onVote($event)"></ballots-item>
+        </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid *ngIf="isLandscape()">
+    <ion-row>
+      <ion-col>
+        <ballots-item 
+          [currentBallots]="getCurrentBallots()"
+          [index]="0"
+          [votedIndex]="getVotedIndex()"
+          (didVote)="onVote($event)"></ballots-item>
+      </ion-col>
+      <ion-col>
+        <ballots-item 
+          [currentBallots]="getCurrentBallots()"
+          [index]="1"
+          [votedIndex]="getVotedIndex()"
+          (didVote)="onVote($event)"></ballots-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
