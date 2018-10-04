@@ -20,6 +20,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
 import { BallotsServiceInterceptor } from '../services/ballots_service_interceptor';
 import { Camera } from '@ionic-native/camera';
 import { Crop } from '@ionic-native/crop';
+import { LoginService } from '../services/login_service';
 
 export const fireBaseConfig = {
   apiKey: "AIzaSyDERYE5dI09774KrigbB2uMxIixNHtY9Mo",
@@ -56,6 +57,7 @@ export const fireBaseConfig = {
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
+    LoginService,
     BallotsService,
     BallotsServiceMock,
     BallotsServiceForUnitTest,

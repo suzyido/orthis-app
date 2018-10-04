@@ -8,6 +8,7 @@ import { VoteIndex } from '../../enums/vote_index_enum';
 import { NewBallotsPage } from '../new-ballots/new-ballots';
 import { BallotsService } from '../../services/ballots_service';
 import { ServerBallots } from '../../models/server_ballots';
+import { LoginService } from '../../services/login_service';
 
 @Component({
   selector: 'page-home',
@@ -24,17 +25,24 @@ export class HomePage implements OnInit {
   
   constructor(public navCtrl: NavController,
               public screenOrientation: ScreenOrientation,
-              public ballotsService: BallotsServiceMock) {}
+              public ballotsService: BallotsService,
+              public loginService: LoginService) {}
 
   ngOnInit() { // Unit Tested
     this.orientation = this.getCurrentScreenOrientation();
     console.log(this.orientation);
     this.currentBallots = this.ballotsService.getDefaultBallots();
     this.onNext();
+    this.login();
   }
 
   setCurrentBallots(ballots: DoubleBallots) {
     this.currentBallots = ballots;
+  }
+
+  login() {
+    this.loginService.login()
+    .subscribe();
   }
 
   onNext() { // Unit Tested

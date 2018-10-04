@@ -15,9 +15,22 @@ export class BallotsService implements IBallotsService {
         return null;
     }
 
+    login() : Observable<Object> {
+      const user = {
+          email: 'suzyido@yahoo.com',
+          password: 'password'
+      };
+
+      console.log('In LoginService.login');
+      const path = "http://localhost:3000/users/login";
+      let res = this.httpClient.post(path, user);
+      console.log('In LoginService.login.after with: ', res);
+      return res;
+    }
+
     getNextBallots(): Observable<Object> {
       console.log('In BallotsService.getNextBallots');
-      const path = "http://localhost:8080/api/list/ballot/";
+      const path = "http://localhost:3000/options_group";
       let res = this.httpClient.get(path);
       console.log('After get: ');
       console.log(res);
