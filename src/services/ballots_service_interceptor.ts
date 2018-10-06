@@ -7,10 +7,10 @@ export class BallotsServiceInterceptor implements HttpInterceptor {
 
     intercept(req: HttpRequest<DoubleBallots>, next: HttpHandler) {
         let currentUser = JSON.parse(localStorage.getItem('currentUser'));
-        if (currentUser && currentUser.token) {
+        if (currentUser) {
             req = req.clone({
                 setHeaders: { 
-                    'x-auth': 'afdafddsafafd'
+                    'x-auth': currentUser
                 }
             });
         }
