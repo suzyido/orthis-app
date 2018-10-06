@@ -6,13 +6,14 @@ import { DoubleBallots } from "../models/double_ballots";
 export class BallotsServiceInterceptor implements HttpInterceptor {
 
     intercept(req: HttpRequest<DoubleBallots>, next: HttpHandler) {
-        const newRequest = req.clone({
-            withCredentials: true
-        });
-//        console.log('In Interceptor');
-//        console.log(newRequest);
-//        console.log(newRequest.body);
-
-        return next.handle(newRequest);
+        let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        if (currentUser && currentUser.token) {
+            req = req.clone({
+                setHeaders: { 
+                    'x-auth': 'afdafddsafafd'
+                }
+            });
+        }
+        return next.handle(req);
     }
 }

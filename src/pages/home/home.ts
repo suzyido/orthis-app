@@ -1,4 +1,4 @@
-import { BallotsServiceMock } from './../../mock/ballots_service_mock';
+import { HttpResponse } from '@angular/common/http';
 import { ServerToClientMapper } from '../../server/server_to_client_mapper';
 import { DoubleBallots } from '../../models/double_ballots';
 import { Component, OnInit } from '@angular/core';
@@ -32,7 +32,6 @@ export class HomePage implements OnInit {
     this.orientation = this.getCurrentScreenOrientation();
     console.log(this.orientation);
     this.currentBallots = this.ballotsService.getDefaultBallots();
-    this.onNext();
     this.login();
   }
 
@@ -41,8 +40,11 @@ export class HomePage implements OnInit {
   }
 
   login() {
-    this.loginService.login()
-    .subscribe();
+    this.loginService.login('suzyido@yahoo.com', 'password')
+    .subscribe((user: HttpResponse<Object>) => {
+      console.log('User successfuly logged in with token:', user.headers.get('x-auth'));
+      this.onNext();
+    });
   }
 
   onNext() { // Unit Tested

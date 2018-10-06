@@ -1,4 +1,4 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable } from "rxjs/Observable";
 import { Injectable } from "@angular/core";
 
@@ -6,16 +6,20 @@ import { Injectable } from "@angular/core";
 export class LoginService {
     constructor(private httpClient: HttpClient) {}
 
-    login() : Observable<Object> {
-        const user = {
-            email: 'suzyido@yahoo.com',
-            password: 'password'
-        };
-
-        console.log('In LoginService.login');
+    login(email: string, password: string) : Observable<Object> {
+//        console.log('In LoginService.login');
         const path = "http://localhost:3000/users/login";
-        let res = this.httpClient.post(path, user);
-        console.log('In LoginService.login.after with: ', res);
-        return res;
-    }
+        
+        return this.httpClient.post(path, 
+            {email, password}, 
+            {
+                headers: new HttpHeaders()
+                .set('Content-Type', 'application/json'),
+                observe: 'response'                                    
+            });
+//            .map((res: HttpResponse<Object>) => {
+//                console.log('Printing the headers', res.headers.get('x-auth'));
+//            return res;
+        };
+//    }
 }
