@@ -42,12 +42,14 @@ export class BallotsItemComponent {
     @Output() didVote = new EventEmitter<number>();
 
     private getVote(): Vote {
-      if(0 == this.index) {
-        return this.currentBallots.getFirstVote(); 
+      if(this.currentBallots) {
+        if(0 == this.index) {
+          return this.currentBallots.getFirstVote(); 
+        }
+        else if(1 == this.index) {
+          return this.currentBallots.getSecondVote();
+        }
       }
-      else if(1 == this.index) {
-              return this.currentBallots.getSecondVote();
-            }
       return null;
     }
 
@@ -77,12 +79,16 @@ export class BallotsItemComponent {
     }
   
     getBallotQuestion(): string {
-      return this.currentBallots.getQuestion();
+      if(this.currentBallots) {
+        return this.currentBallots.getQuestion();
+      }
     }
     
     getVoteTitle(): string {
-      return (this.index == VoteIndex.FirstVote) ? this.currentBallots.getFirstVote().getTitle() : 
-                      this.currentBallots.getSecondVote().getTitle();    
+      if(this.currentBallots) {
+        return (this.index == VoteIndex.FirstVote) ? this.currentBallots.getFirstVote().getTitle() : 
+                        this.currentBallots.getSecondVote().getTitle();
+      }    
     }
   
     getCurrentBallots(): DoubleBallots {

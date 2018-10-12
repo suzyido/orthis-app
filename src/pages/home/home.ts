@@ -51,14 +51,12 @@ export class HomePage implements OnInit {
     this.votedIndex = undefined;
     this.ballotsService.getNextBallots()
     .subscribe(
-      (list: ServerBallots[]) => {
-        console.log('In onNext');
-        console.log(list);
-        if(list) {
-          this.currentBallots = new ServerToClientMapper().toClientBallots(list[0]);
+      (serverOptionsGroup: Object) => {
+        if(Object.keys(serverOptionsGroup).length > 0) {
+          this.currentBallots = new ServerToClientMapper().toClientBallots(serverOptionsGroup);
         }
         else {
-          return null;
+          this.currentBallots = null;
         }
       },
       (error) => {
@@ -143,7 +141,9 @@ export class HomePage implements OnInit {
   }
 
   getBallotsQuestion(): string { // Unit Tested
-    return this.currentBallots.getQuestion();
+    if(this.currentBallots) {
+      return this.currentBallots.getQuestion();
+    }
   }
   
   getVoteTitle(index: VoteIndex): string { // Unit Tested

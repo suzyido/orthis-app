@@ -9,50 +9,38 @@ import { ServerBallotsOptionContent } from "../models/server_ballots_option_cont
 
 export class ServerToClientMapper {
     
-    toClientBallots(serverBallots: ServerBallots): DoubleBallots {
-        const id: number = serverBallots.id;
-        const question: string = serverBallots.definition.question.question;
-        const isNewBallots: boolean = serverBallots.status == 1 ; // TBD Ask Ethan
+    toClientBallots(serverOptionsGroup): DoubleBallots {
+        console.log('In toClientBallots', serverOptionsGroup);
+        const id: number = serverOptionsGroup._id;
+        const question: string = serverOptionsGroup.title;
+        const totalSelectedCount = 
+                        serverOptionsGroup.options[0].selectedCount + 
+                        serverOptionsGroup.options[1].selectedCount;
         
-        let voteType: number = // TBD Ask Ethan
-                serverBallots.definition.option1.contents.length > 0 ?
-                    VoteType.Picture : VoteType.Text;
-
-        let title: string = serverBallots.definition.option1.description;
-        
-        let data: string = 
-            serverBallots.definition.option1.contents.length > 0 ?
-                serverBallots.definition.option1.contents[0].document : 
-                serverBallots.definition.option1.answer;
-
+        let voteType: number = serverOptionsGroup.options[0].type == 'text' ?
+                               VoteType.Text : VoteType.Picture;
+        let title: string = serverOptionsGroup.options[0].title;
+        let data: string = serverOptionsGroup.options[0].data;
         let percentage: number = 
-            Math.floor(100 * (serverBallots.opt1_count / serverBallots.vote_count));
-
+            Math.floor(100 * (serverOptionsGroup.options[0].selectedCount / totalSelectedCount));
         let firstVote: Vote = new Vote(voteType, title, data, percentage);
-
-        voteType = // TBD Ask Ethan
-            serverBallots.definition.option2.contents.length > 0 ?
-                VoteType.Picture : VoteType.Text;
-
-        title = serverBallots.definition.option2.description;
         
-        data = 
-            serverBallots.definition.option2.contents.length > 0 ?
-                serverBallots.definition.option2.contents[0].document : 
-                serverBallots.definition.option2.answer;
-
-        percentage = 100 - percentage;
-        
+        voteType = serverOptionsGroup.options[1].type == 'text' ?
+                   VoteType.Text : VoteType.Picture;
+        title = serverOptionsGroup.options[1].title;
+        data = serverOptionsGroup.options[1].data;
+        percentage = 
+            Math.floor(100 * (serverOptionsGroup.options[1].selectedCount / totalSelectedCount));
         let secondVote: Vote = new Vote(voteType, title, data, percentage);
 
         const ballots: DoubleBallots = new DoubleBallots(id, 
                                                          question, 
                                                          firstVote, 
                                                          secondVote, 
-                                                         isNewBallots);
+                                                         true);
         return ballots;
     }
-
+    
     toServerBallots(ballots: DoubleBallots): ServerBallots {
         return new ServerBallots(1,
             new ServerBallotsDefinition(
