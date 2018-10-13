@@ -1,4 +1,10 @@
 page-new-ballots {
+    .new_ballots_title {
+        font-size: 24px;
+        color: color($colors, voteTextColor);
+        font-weight: bold;
+    }
+
     .add_ballots_item {
         margin-top: 10px;
         margin-bottom: 10px;

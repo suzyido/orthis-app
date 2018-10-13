@@ -9,6 +9,7 @@ import { NavController } from 'ionic-angular';
 })
 export class NewBallotsPage {
   documents: string[] = new Array(2);
+  ballotsTitle: string;
 
   constructor(private navCtrl: NavController,
               private ballotsService: BallotsService) {
@@ -26,9 +27,7 @@ export class NewBallotsPage {
   }
 
   onSave() {
-    var title: string = "Temp Title";
-
-    this.ballotsService.postNewBallots(title, this.documents)
+    this.ballotsService.postNewBallots(this.ballotsTitle, this.documents)
     .subscribe(
       (optionsGroup: Object) => {
         console.log('Response from postNewBallots: ', optionsGroup);

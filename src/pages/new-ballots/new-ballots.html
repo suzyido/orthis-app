@@ -22,9 +22,22 @@
 </ion-header>
 
 <ion-content padding class="main-content">
-  <form>
-    <ion-label text-center class="ballotTitle">Create a new Ballots</ion-label>
     <ion-grid>
+        <ion-card>
+          <ion-card-content>
+              <ion-row>
+                <ion-col>
+                    <ion-item>
+                        <ion-input 
+                            type="text" 
+                            class="new_ballots_title" 
+                            placeholder="Title..."
+                            [(ngModel)]="ballotsTitle"></ion-input>
+                    </ion-item>        
+                </ion-col>
+              </ion-row>
+          </ion-card-content>          
+        </ion-card>
       <ion-row>
         <ion-col>
           <new-ballots-item
@@ -42,5 +55,4 @@
         </ion-col>
       </ion-row>    
     </ion-grid>
-  </form>
 </ion-content>

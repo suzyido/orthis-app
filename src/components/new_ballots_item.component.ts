@@ -159,7 +159,6 @@ export class NewBallotsItemComponent {
             this.documentType = NewBallotsItemViewMode.Text;
             this.onCreated.emit({
                 'type': 'text', 
-                'title': 'temp title', 
                 'data': data.text});
           }
         });
