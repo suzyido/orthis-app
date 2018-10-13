@@ -56,7 +56,7 @@ import { NewBallotsTextItemPage } from '../pages/new-ballots-text-item/new-ballo
       <div class="text_vote_container">
         <span 
           class="text_vote">
-          {{document}}
+          {{document.data}}
         </span>  
       </div>
       <button 
@@ -71,7 +71,7 @@ import { NewBallotsTextItemPage } from '../pages/new-ballots-text-item/new-ballo
 })
 export class NewBallotsItemComponent {
     @Input() document: string;
-    @Output() onCreated = new EventEmitter<string>();
+    @Output() onCreated = new EventEmitter<any>();
     documentType = NewBallotsItemViewMode.Empty; 
 
     constructor(private camera: Camera,
@@ -109,7 +109,12 @@ export class NewBallotsItemComponent {
         this.camera.getPicture(options)
         .then((imageData) => {
           this.documentType = NewBallotsItemViewMode.Image;
-          this.onCreated.emit('data:image/jpeg;base64,' + imageData);
+          const data = 'data:image/jpeg;base64,' + imageData;
+          this.onCreated.emit({
+                                'type': 'text', 
+                                'title': 'temp title', 
+                                'data': data
+                              });
         }, 
         (err) => {
           console.log('Error taking picture for');
@@ -128,7 +133,12 @@ export class NewBallotsItemComponent {
         this.camera.getPicture(options)
         .then((imageData) => {
           this.documentType = NewBallotsItemViewMode.Image;
-          this.onCreated.emit('data:image/jpeg;base64,' + imageData);
+          const data = 'data:image/jpeg;base64,' + imageData;
+          this.onCreated.emit({
+                                'type': 'text',
+                                'title': 'temp title', 
+                                'data': data
+                              });
         }, 
         (err) => {
             console.log('Error loading picture from galery');
@@ -147,7 +157,10 @@ export class NewBallotsItemComponent {
           console.log(data.text);
           if(data.action == 'ok') {
             this.documentType = NewBallotsItemViewMode.Text;
-            this.onCreated.emit(data.text);
+            this.onCreated.emit({
+                'type': 'text', 
+                'title': 'temp title', 
+                'data': data.text});
           }
         });
     }
