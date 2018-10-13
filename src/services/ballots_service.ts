@@ -25,7 +25,6 @@ export class BallotsService implements IBallotsService {
     }
 
     postNewBallots(title: string, ballots: any[]) {
-      console.log('In post New Ballots with', ballots);
       const path = "http://localhost:3000/options_group";
       const body = {
         'title': title,
@@ -43,28 +42,6 @@ export class BallotsService implements IBallotsService {
       };
       return this.httpClient.post(path, body);
     }
-
-/*
-    login(email: string, password: string) : Observable<Object> {
-      const path = "http://localhost:3000/users/login";
-      
-      return this.httpClient.post(path, 
-          {email, password}, 
-          {
-              headers: new HttpHeaders()
-              .set('Content-Type', 'application/json'),
-              observe: 'response'                                    
-          })
-         .map((res: HttpResponse<Object>) => {
-              if(res && res.headers && res.headers.get('x-auth')) {
-                  localStorage.setItem('currentUser', JSON.stringify(res.headers.get('x-auth')));
-//                    console.log('Printing the localStorage currentUser: ', localStorage.getItem('currentUser'));
-              }
-              return res;
-          });
-  }
-
-*/
 
     getPreviousBallots(): Observable<Object> {
         console.log('In BallotsService.getPreviousBallots');
